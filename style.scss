@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700;900&display=swap");
+
+// Paleta
+$bg1: #ffe0e9;   // rosa pastel 1
+$bg2: #ffd6d0;   // rosa pastel 2
+$ink: #2d2a32;   // texto principal
+$rose: #ff6f9e;  // rosa intenso
+$rose-dark: #ef4e84;
+$gold: #f5c451;  // dorado
+$ivory: #fff7f2; // marfil
+
+// Tipos
+$font: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+$big: "Montserrat", "Poppins", sans-serif;
+
+// Base
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: $font;
+  background: linear-gradient(135deg, $bg1, $bg2);
+  color: $ink;
+  display: grid;
+  place-items: center;
+}
+
+.wrap {
+  width: min(920px, 92vw);
+  text-align: center;
+  padding: 32px 20px 40px;
+  background: rgba(255,255,255,.45);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.12);
+}
+
+.title {
+  margin: 0 0 18px;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: $rose-dark;
+
+  span {
+    font-weight: 800;
+    color: $rose;
+  }
+}
+
+.timer {
+  margin: 10px auto 8px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  gap: 16px;
+
+  @media (max-width: 720px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.box {
+  background: $ivory;
+  border-radius: 16px;
+  padding: 22px 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  border: 1px solid rgba(0,0,0,.04);
+  transition: transform .25s ease, box-shadow .25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0,0,0,.12);
+  }
+
+  .numbers {
+    font-family: $big;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: .5px;
+  }
+
+  .label {
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: .85rem;
+    opacity: .9;
+  }
+}
+
+// Acentos por caja
+.box-days    { background: linear-gradient(180deg, #ffd9e8, #ffeaf2);  .numbers{ color: $rose-dark; } }
+.box-hours   { background: linear-gradient(180deg, #fff, #fff7f0);     .numbers{ color: $ink; } }
+.box-minutes { background: linear-gradient(180deg, #e6f1ff, #eaf3ff);  .numbers{ color: #2463c5; } }
+.box-seconds { background: linear-gradient(180deg, #fff2d1, #ffe6a1);  .numbers{ color: darken($gold, 25%); } }
+
+// Mensaje final
+.mensaje {
+  margin: 14px 0 0;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: $rose-dark;
+  min-height: 1.5em;
+}
+
+// Animación sutil cada segundo
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.flash { animation: pop .28s ease; }
