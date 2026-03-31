@@ -1,11 +1,13 @@
 function proximaFechaObjetivo() {
   const ahora = new Date();
-  const year = ahora.getFullYear();
-  const objetivoEsteAño = new Date(year, 2, 30, 0, 0, 0); // 30 marzo 00:00:00
-  // Si ya pasó el 30 de marzo de este año, vamos al próximo
-  return (ahora > objetivoEsteAño)
-    ? new Date(year + 1, 2, 30, 0, 0, 0)
-    : objetivoEsteAño;
+  const objetivoHoy = new Date(
+    ahora.getFullYear(),
+    ahora.getMonth(),
+    ahora.getDate(),
+    23, 15, 0 // hoy a las 11:15 PM
+  );
+
+  return objetivoHoy;
 }
 
 let cumple = proximaFechaObjetivo().getTime();
@@ -41,7 +43,6 @@ function lanzarConfeti(duracionMs = 5000) {
 function flashNums() {
   document.querySelectorAll(".numbers").forEach(el => {
     el.classList.remove("flash");
-    // reflow para reiniciar la animación
     void el.offsetWidth;
     el.classList.add("flash");
   });
@@ -53,12 +54,11 @@ function tick() {
   const diff = cumple - ahora;
 
   if (diff <= 0) {
-    // Llegó el día 🎉
     $days.textContent = "0";
     $hours.textContent = "00";
     $minutes.textContent = "00";
     $seconds.textContent = "00";
-    $mensaje.textContent = "🎉 Feliz cumpleaños, mi Karlita, mi Chokis hermosa 🎂💖 Hoy celebro la dicha tan grande de tenerte en mi vida, porque no solo cumples un año más, sino que también haces más bonito mi mundo con tu sonrisa, tu ternura y esa manera tan especial que tienes de alegrar mi corazón. Quiero que este día esté lleno de amor, abrazos, momentos felices y muchas razones para sonreír, porque te mereces eso y muchísimo más. Gracias por ser esa personita tan maravillosa, dulce y especial para mí. Eres alguien que quiero cuidar, valorar y hacer feliz siempre. Deseo de todo corazón que cada uno de tus sueños se vaya cumpliendo y que nunca te falten motivos para brillar, porque tú eres una niña preciosa, única e inolvidable. Feliz cumpleaños, mi Karlita y mi Chokis. Te quiero muchísimo y hoy más que nunca deseo que tu día sea tan hermoso como tú.💖";
+    $mensaje.textContent = "🎉 Feliz cumpleaños, mi Karlita, mi Chokis hermosa 🎂💖 Hoy celebro la dicha tan grande de tenerte en mi vida...";
     lanzarConfeti(6000);
     clearInterval(intervalo);
     return;
@@ -73,9 +73,9 @@ function tick() {
   $hours.textContent = String(h).padStart(2, "0");
   $minutes.textContent = String(m).padStart(2, "0");
   $seconds.textContent = String(s).padStart(2, "0");
-  $mensaje.textContent = ""; // vacío hasta el día
+  $mensaje.textContent = "";
   flashNums();
 }
 
 const intervalo = setInterval(tick, 1000);
-tick(); // primer render inmediato
+tick();
