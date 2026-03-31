@@ -4,7 +4,7 @@ function proximaFechaObjetivo() {
     ahora.getFullYear(),
     ahora.getMonth(),
     ahora.getDate(),
-    23, 15, 0 // hoy a las 11:15 PM
+    23, 30, 0 // hoy a las 11:15 PM
   );
 
   return objetivoHoy;
